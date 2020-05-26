@@ -10,6 +10,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'notes/css/base.css' %}">
 
     <title>Title</title>
+    <script type="text/javascript">
+    let token = '{{csrf_token}}'
+  </script>
   </head>
   <body>
 <div class="navigation-wrap bg-light start-header start-style">
@@ -46,7 +49,7 @@
             </div>
         </div>
     </div>
-    <section id="voice-section" class="voice-section  bg-join py-5">
+  <section id="voice-section" class="py-5">
     <div class="container py-md-4 text-center">
                   <img id="voice-section-image" src="{% static 'notes/images/voice.png' %}" class="img-fluid" alt="">
         <div class="last-hit3pvt-inner-content px-lg-5">
@@ -54,13 +57,37 @@
                 <button type ="button" class="btn btn-primary ">Activate Voice</button>
             </div>
         </div>
-        <textarea id="message" name="message"></textarea>
+        <div class="form-group">
+        <textarea class="form-control" id="message" name="message"></textarea>
+        </div>
     </div>
 </section>
 
+<section id="notes-section" class="py-5">
+  <div class="container py-md-4">
+    <h3 class="text-center">NOTES</h3>
+    {% for note in notes %}
+    <div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{note.title}}</h5>
+        <p class="card-text">{{note.content}}</p>
+        <button id="{{note.id}}" class="btn btn-primary play-voice">Play</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endfor %}
+  </div>
+
+</section>
+
+  
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'notes/js/textToVoice.js' %}"></script>
   </body>
 </html>
