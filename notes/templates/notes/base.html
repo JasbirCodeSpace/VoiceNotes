@@ -33,12 +33,23 @@
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                         <a class="nav-link" href="#notes-section">Notes</a>
                                     </li>
+                                    {% if user.is_authenticated %}
+                                  <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="{% url 'user-profile' %}">Profile</a>
+                                    </li>                                   
+                                                                        <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="{% url 'user-logout' %}">Log Out</a>
+                                    </li>
+
+                                    {% else %}
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="#ourTeam">Sign Up</a>
+                                        <a class="nav-link" href="{%url 'user-signup'%}">Sign Up</a>
                                     </li>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link" href="#meetups">Sign In</a>
+                                        <a class="nav-link" href="{% url 'user-signin' %}">Sign In</a>
                                     </li>
+                                    {% endif %}
+
                                 </ul>
                             </div>
                         </nav>
