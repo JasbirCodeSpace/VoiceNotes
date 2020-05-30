@@ -3,6 +3,7 @@ from .forms import SignUpForm
 from django.contrib.auth import login,logout,authenticate,update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 
 
 def signup(request):
@@ -36,8 +37,6 @@ def changePassword(request):
 		form = PasswordChangeForm()
 	return render(request,'changePassword.html',{'form':form})
 
-
-		
-	
-	
-		
+@login_required
+def profile(request):
+	return render(request,'users/profile.html')
