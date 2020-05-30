@@ -14,10 +14,10 @@ def signup(request):
 			password = form.cleaned_data.get('password1')
 			user = authenticate(username=username,password=password)
 			login(request,user)
-			return redirect('home')
+			return redirect('notes-home')
 	else:
-		signupform = SignUpForm()
-		return redirect(request,'SignUp.html',{'form':form})
+		form = SignUpForm()
+	return render(request,'users/signup.html',{'form':form})
 
 def logout(request):
 	user = request.user
