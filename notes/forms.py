@@ -3,11 +3,15 @@ from .models import Note
 
 
 class NoteForm(forms.ModelForm):
-	class Meta:
-		model = Note
-		fields = '__all__'
-		exclude = ['user']
-		widgets = {
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['title'].widget.attrs.update({'class': 'speech-input'})
+
+    class Meta:
+        model = Note
+        fields = '__all__'
+        exclude = ['user']
+        widgets = {
             'tags': forms.TextInput(
                 attrs={
                     'data-role':'tagsinput',

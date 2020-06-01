@@ -316,3 +316,11 @@ textarea{
           transform: translateY(-50%);
   will-change: left;
 }
+
+
+
+@media only screen and (max-width: 768px) {
+section{
+  margin-top: 4rem;
+}
+}

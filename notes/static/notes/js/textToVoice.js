@@ -1,25 +1,29 @@
-$(".play-voice").click(function(e) {
-    $.ajax({
-        url: "/playNotes",
-        method: 'POST',
-        data: {
-            'id': e.target.id
-        },
-        success: function(result) {
-            console.log('done')
-            console.log(result)
-        }
-    });
-});
+// $(".play-voice").click(function(e) {
+//     $.ajax({
+//         url: "/playNotes",
+//         method: 'POST',
+//         data: {
+//             'id': e.target.id
+//         },
+//         success: function(result) {
+//             console.log('done')
+//             console.log(result)
+//         }
+//     });
+// });
 
 const synth = window.speechSynthesis
 let voices = []
 const voiceSelect = document.getElementById('voice-select')
 const settingForm = document.getElementById('setting-form')
+
 const rate = document.getElementById('rate')
 const rateValueLabel = document.getElementById('rate-value')
 const pitch = document.getElementById('pitch')
 const pitchValueLabel = document.getElementById('pitch-value')
+const volume = document.getElementById('volume')
+const volumeValueLabel = document.getElementById('volume-value')
+
 
 let playButton =  document.getElementsByClassName('play')
 let stopButton =  document.getElementsByClassName('stop')
@@ -70,7 +74,8 @@ const speak = (noteTitle,noteContent) => {
 
 		speakText.rate = rate.value
 		speakText.pitch = pitch.value
-
+		speakText.volume = (volume.value/100).toFixed(2)
+		console.log(speakText.volume)
 		synth.speak(speakText)
 
 	}
@@ -123,4 +128,5 @@ for (var i = 0; i < stopButton.length; i++) {
 
 rate.addEventListener('click',e=>rateValueLabel.textContent = rate.value)
 pitch.addEventListener('click',e=>pitchValueLabel.textContent = pitch.value)
+volume.addEventListener('click',e=>volumeValueLabel.textContent = volume.value)
 // voiceSelect.addEventListener('change',e=>speak())
