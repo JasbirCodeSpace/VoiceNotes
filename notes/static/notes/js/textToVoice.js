@@ -49,9 +49,10 @@ const speak = (noteTitle,noteContent) => {
 	if (noteContent !== '') {
 		let intro = "";
 		if(noteTitle !== '')
-			intro = "This note is about "+noteTitle+'<silence msec="1000" />'
+			intro = "This note is about "+noteTitle+", "
 
 		const speakText = new SpeechSynthesisUtterance(intro+noteContent)
+
 		speakText.onend = e=> {
 			console.log("Done speaking")
 		}
@@ -77,7 +78,6 @@ const speak = (noteTitle,noteContent) => {
 
 const deactivateButton = (className,ignoreClassName)=>{
 
-	console.log(('button.'+className+'.'+ignoreClassName))
 	document.querySelectorAll('button.'+className).forEach(elem => {
     		elem.disabled = true;
 	});

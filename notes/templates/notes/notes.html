@@ -79,6 +79,10 @@
                             <button class="btn btn-primary btn-sm play note{{note.id}}">Play</button>
                             <button class="btn btn-primary btn-sm pause note{{note.id}}">Pause</button>
                             <button class="btn btn-primary btn-sm stop note{{note.id}}">Stop</button>
+                            <div class="float-right">
+                                <button class="btn btn-light btn-sm edit-note-button" data-url= "{% url 'note-edit' note.id %}" ><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                <button class="btn btn-danger btn-sm delete-note-button" data-url="{% url 'note-delete-confirm' note.id %}"><i class="fa fa-trash-alt" aria-hidden="true"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
