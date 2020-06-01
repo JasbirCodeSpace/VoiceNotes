@@ -1,8 +1,8 @@
 import os
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Note
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse,Http404
 from .forms import NoteForm
 
 def home(request):
@@ -26,21 +26,43 @@ def home(request):
 	else:
 		return redirect('user-signin')
 
-def create_note(request):
-	if request.user.is_authenticated:
-		if request.method == "POST":
-			form = NoteForm(request.POST)
-			if form.is_valid():
-				form_data = form.save(commit=False)
-				form_data.user = request.user
-				form_data.save()
-		else:
-			form = NoteForm()
-			context = {'form': form}
-		return render(request ,'notes/notes.html',context)
+def update_note(request,id):
+	note = get_object_or_404(Note,pk=id)
+	if note.user != request.user:
+		return redirect('notes-home')
+	if request.method == 'POST':
+		form = NoteForm(request.POST,instance=note)
+		if form.is_valid():
+			form_data = form.save(commit=False)
+			form_data.save()
+			return redirect('notes-home')
 	else:
-		return render(request,'users/login.html')
+		form = NoteForm(initial={
+			'title': note.title,
+			'content': note.content
+			}, instance = note)
+		context = {
+			'form':form
+		}
+		return render(request,'notes/modal/edit_note.html',context)
 
+def delete_note_confirm(request, id):
+	note = get_object_or_404(Note, pk=id)
+	if note.user != request.user:
+		return redirect('notes-home')
+	else:
+		context = {
+			'note' : note
+		}
+		return render(request,'notes/modal/delete_note.html',context)
+
+def delete_note(request, id):
+	note = get_object_or_404(Note, pk=id)
+	if note.user != request.user:
+		return redirect('notes-home')
+	else:
+		note.delete()
+		return redirect('notes-home')
 # @csrf_exempt
 # def play_notes(request):
 # 	if request.method == 'POST':
