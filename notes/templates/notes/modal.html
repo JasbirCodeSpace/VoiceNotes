@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+        <!-- Add Modal -->
+        <div class="modal fade" id="add_note">
+            <div class="modal-dialog modal-lg w-100 mw-100" style="margin-left: 0.5%;">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Note</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <form action="{% url 'notes-home' %}" method="post">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <div class="row">
+                                {{ new_note_form.media }}
+                                {% for field in new_note_form %}
+                                <div class="form-group col-lg-12 col-md-12">
+                                    {{ field | as_crispy_field }}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-success" value="Add">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
