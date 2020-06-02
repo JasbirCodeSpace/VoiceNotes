@@ -1,17 +1,3 @@
-// $(".play-voice").click(function(e) {
-//     $.ajax({
-//         url: "/playNotes",
-//         method: 'POST',
-//         data: {
-//             'id': e.target.id
-//         },
-//         success: function(result) {
-//             console.log('done')
-//             console.log(result)
-//         }
-//     });
-// });
-
 const synth = window.speechSynthesis
 let voices = []
 const voiceSelect = document.getElementById('voice-select')
@@ -74,10 +60,10 @@ const speak = (noteTitle,noteContent) => {
 
 		speakText.rate = rate.value
 		speakText.pitch = pitch.value
-		speakText.volume = (volume.value/100).toFixed(2)
-		console.log(speakText.volume)
+		speakText.volume = ((volume.value)/100).toFixed(2)
 		synth.speak(speakText)
 
+	}else{
 	}
 }
 
@@ -97,7 +83,7 @@ for (var i = 0; i < playButton.length; i++) {
 	if(synth.paused){
 		synth.resume()
 	}else{
-	let className = e.target.classList[e.target.classList.length-1]
+	let className = e.currentTarget.classList[e.currentTarget.classList.length-1]
 	deactivateButton('pause',className)
 	deactivateButton('stop',className)
 
