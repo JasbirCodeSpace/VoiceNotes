@@ -25,6 +25,7 @@ def logout(request):
 	logout(request,user)
 	return redirect('login')
 
+@login_required
 def changePassword(request):
 	if request.method == 'POST':
 		form = PasswordChangeForm(request.user,request.POST)
@@ -34,8 +35,8 @@ def changePassword(request):
 			messages.success(request,"Your password was successfully updated")
 			return redirect('home')
 	else:
-		form = PasswordChangeForm()
-	return render(request,'changePassword.html',{'form':form})
+		form = PasswordChangeForm(request.user)
+	return render(request,'users/change_password.html',{'form':form})
 
 @login_required
 def profile(request):
