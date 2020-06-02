@@ -63,6 +63,10 @@ def delete_note(request, id):
 	else:
 		note.delete()
 		return redirect('notes-home')
+
+def profile(request):
+	if request.user.is_authenticated:
+		return render(request,'users/profile.html')
 # @csrf_exempt
 # def play_notes(request):
 # 	if request.method == 'POST':
