@@ -1,9 +1,10 @@
 {% extends 'notes/base.html' %}
 {% load static %}
-{% block navbar %}
-{% endblock navbar%}
 {% block content %}
 {% include 'notes/navbar.html' %}
+{% include 'notes/modal/create_note.html' %}
+<div id="edit-note-modal-outer-div" ></div>
+<div id="delete-note-modal-outer-div" ></div>
 <!-- <section id="voice-section" class="py-5">
     <div class="container py-md-4 text-center">
         <img id="voice-section-image" src="{% static 'notes/images/voice.png' %}" class="img-fluid" alt="">
@@ -16,7 +17,7 @@
             <textarea class="form-control" id="message" name="message"></textarea>
         </div>
     </div>
-</section> -->
+    </section> -->
 <section id="notes-section" class="pt-5 py-5 mb-5">
     <div class="container py-md-4">
         <div class="text-center mb-5">
@@ -103,10 +104,4 @@
         </div>
     </div>
 </section>
-<div class="modal fade" id="modal-note">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
 {% endblock content %}

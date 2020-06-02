@@ -3,9 +3,10 @@ from .models import Note
 
 
 class NoteForm(forms.ModelForm):
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['title'].widget.attrs.update({'class': 'speech-input'})
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({'class': 'speech-input'})
+        self.fields['content'].widget.attrs.update({'class': 'speech-input'})
 
     class Meta:
         model = Note

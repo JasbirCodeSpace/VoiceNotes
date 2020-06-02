@@ -12,9 +12,6 @@
         <title>Title</title>
     </head>
     <body>
-        {% include 'notes/modal/create_note.html' %}
-        <div id="edit-note-modal-outer-div" ></div>
-        <div id="delete-note-modal-outer-div" ></div>
         {% block content %}
         {% endblock content %}
         
@@ -25,6 +22,5 @@
         <script type="text/javascript" src="{% static 'notes/js/textToVoice.js' %}"></script>
         <script type="text/javascript" src="{% static 'notes/js/speechRecognition.js' %}"></script>
         <script type="text/javascript" src="{% static 'notes/js/main.js' %}"></script>
-        <script type="text/javascript" src="{% static 'notes/js/speech-input.js' %}"></script>
     </body>
 </html>

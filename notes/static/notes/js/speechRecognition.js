@@ -120,7 +120,7 @@ function updateCountry() {
   select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
 
 }
-    function speakInput(){
+    function speakInput(id){
     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     let finalTranscript = '';
     let recognition = new window.SpeechRecognition();
@@ -142,3 +142,9 @@ function updateCountry() {
     }
     recognition.start();
   }
+
+  $('.speech-input').on('click', function() {
+    let id = $(this).attr('id')
+    console.log(id)
+    speakInput(id)
+});
