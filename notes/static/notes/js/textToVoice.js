@@ -31,17 +31,17 @@ window.onload = (function() {
     }
 })()
 
-const speak = (noteTitle,noteContent) => {
+const speak = (title,content) => {
 	if(synth.speaking){
 		console.error("Already speaking")
 		return
 	}
-	if (noteContent !== '') {
+	if (content !== '') {
 		let intro = "";
-		if(noteTitle !== '')
-			intro = "This note is about "+noteTitle+", "
+		if(title !== '')
+			intro = "This note is about "+title+", "
 
-		const speakText = new SpeechSynthesisUtterance(intro+noteContent)
+		const speakText = new SpeechSynthesisUtterance(intro+content)
 
 		speakText.onend = e=> {
 			console.log("Done speaking")
@@ -77,6 +77,12 @@ const deactivateButton = (className,ignoreClassName)=>{
 	});
 
 }
+
+const activateButton = (className)=>{
+	document.querySelectorAll('button.'+className).forEach(elem=>{
+		elem.disabled = false;
+	})
+}
 for (var i = 0; i < playButton.length; i++) {
 	playButton[i].addEventListener('click',e=>{
 	e.preventDefault()
@@ -86,10 +92,11 @@ for (var i = 0; i < playButton.length; i++) {
 	let className = e.currentTarget.classList[e.currentTarget.classList.length-1]
 	deactivateButton('pause',className)
 	deactivateButton('stop',className)
+	deactivateButton('play',className)
 
-	let noteTitle = document.getElementsByClassName(className)[0].textContent
-	let noteContent = document.getElementsByClassName(className)[1].textContent
-	speak(noteTitle,noteContent)
+	let title = document.getElementsByClassName(className)[0].textContent
+	let content = document.getElementsByClassName(className)[1].textContent
+	speak(title,content)
 	}
 })
 }
@@ -106,6 +113,9 @@ for (var i = 0; i < stopButton.length; i++) {
 	e.preventDefault()
     if(synth.speaking){
         synth.cancel();
+        activateButton('pause')
+        activateButton('play')
+        activateButton('stop')
     }
 })
 }
@@ -116,3 +126,15 @@ rate.addEventListener('click',e=>rateValueLabel.textContent = rate.value)
 pitch.addEventListener('click',e=>pitchValueLabel.textContent = pitch.value)
 volume.addEventListener('click',e=>volumeValueLabel.textContent = volume.value)
 // voiceSelect.addEventListener('change',e=>speak())
+
+$('#add_note').on('shown.bs.modal', function () { 
+    if(synth.speaking){
+    	synth.cancel()
+    }
+    speak('','Create new note')
+});
+$('#add_note').on('hidden.bs.modal', function () { 
+    if(synth.speaking){
+    	synth.cancel()
+    }
+});
