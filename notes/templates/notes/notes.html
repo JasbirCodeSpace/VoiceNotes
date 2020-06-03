@@ -41,7 +41,7 @@
                                 </audio> -->
                             <button class="btn btn-light btn-sm play note{{note.id}}"><i class="fa fa-play" aria-hidden="true"></i></button>
                             <button class="btn btn-light btn-sm pause note{{note.id}}"><i class="fa fa-pause" aria-hidden="true"></i></button>
-                            <button class="btn btn-danger btn-sm stop note{{note.id}}"><i class="fa fa-stop" aria-hidden="true"></i></button>
+                            <button class="btn btn-light btn-sm stop note{{note.id}}"><i class="fa fa-stop" aria-hidden="true"></i></button>
                             <div class="float-right">
                                 <button class="btn btn-light btn-sm edit-note-button" data-url= "{% url 'note-edit' note.id %}" ><i class="fa fa-edit" aria-hidden="true"></i></button>
                                 <button class="btn btn-danger btn-sm delete-note-button" data-url="{% url 'note-delete-confirm' note.id %}"><i class="fa fa-trash-alt" aria-hidden="true"></i></button>

@@ -143,8 +143,7 @@ function updateCountry() {
     recognition.start();
   }
 
-  $('.speech-input').on('click', function() {
+  $('body').on('click', '.speech-input', function(){
     let id = $(this).attr('id')
-    console.log(id)
     speakInput(id)
 });
