@@ -11,7 +11,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto py-4 py-md-0">
                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                <a class="nav-link" href="{% url 'notes-home' %}">Home</a>
+                                <a class="nav-link" href="#notes-section">Home</a>
                             </li>
                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                 <a class="nav-link" href="#settings">Settings</a>
@@ -20,12 +20,17 @@
                                 <a class="nav-link" href="#notes-section">Notes</a>
                                 </li> -->
                             {% if user.is_authenticated %}
-                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                <a class="nav-link" href="{% url 'user-profile' %}">Profile</a>
+                            <li class="nav-item dropdown pl-4 pl-md-0 ml-0 ml-md-4">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" 
+                                    aria-haspopup="true" aria-expanded="false">Welcome, {{request.user.username}}</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'user-change-password' %}">Change Password</a>
+                                    <a class="dropdown-item" href="{% url 'user-logout' %}">Logout</a>
+                                </div>
                             </li>
-                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                            <!--                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                 <a class="nav-link" href="{% url 'user-logout' %}">Log Out</a>
-                            </li>
+                                </li> -->
                             {% else %}
                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                 <a class="nav-link" href="{%url 'user-signup'%}">Sign Up</a>
