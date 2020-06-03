@@ -7,6 +7,13 @@ $('.edit-note-button').on('click',function(){
 		success:function(data){
 			$('#edit-note-modal-outer-div').html(data)
 			$('#edit-note').modal()
+			$('#edit-note').on('hidden.bs.modal', function () { 
+			    if(synth.speaking){
+			    	synth.cancel()
+			    }
+			});
+			let text = $('#edit-note').find('.modal-title').text().trim()
+			speak('',text)
 		}
 
 	})
@@ -20,6 +27,14 @@ $('.delete-note-button').on('click',function(){
 		success: function(data){
 			$('#delete-note-modal-outer-div').html(data)
 			$('#delete-note').modal()
+			$('#delete-note').on('hidden.bs.modal', function () { 
+			    if(synth.speaking){
+			    	synth.cancel()
+			    }
+			});
+
+			let text = $('#delete-note').find('.modal-body').text().trim()
+			speak('',text)
 		}
 	})
 })
