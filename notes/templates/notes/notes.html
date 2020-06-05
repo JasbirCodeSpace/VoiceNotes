@@ -27,11 +27,13 @@
             Add new note
             </button>
         </div>
+        {% if notes|length >= 1 %}
         <div class="container">
             <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6 mb-3">
                 <input type="text" id="noteFilter" class="form-control" onkeyup="filterNotes()" placeholder="Search for note...">
             </div>
         </div>
+        {% endif %}
         <div id="notesContainer">
             {% for note in notes %}
             <div class="row mb-3" data-string="{{note.title}}">
