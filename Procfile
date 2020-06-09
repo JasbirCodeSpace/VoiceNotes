@@ -1,0 +1,1 @@
+web: gunicorn Voice_Based_Web_Browsing.wsgi
