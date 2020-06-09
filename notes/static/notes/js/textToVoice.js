@@ -127,12 +127,14 @@ pitch.addEventListener('click',e=>pitchValueLabel.textContent = pitch.value)
 volume.addEventListener('click',e=>volumeValueLabel.textContent = volume.value)
 // voiceSelect.addEventListener('change',e=>speak())
 
+// speak when add note modal opens
 $('#add_note').on('shown.bs.modal', function () { 
     if(synth.speaking){
     	synth.cancel()
     }
     speak('','Create new note')
 });
+// close speak when add note modal closes
 $('#add_note').on('hidden.bs.modal', function () { 
     if(synth.speaking){
     	synth.cancel()
